@@ -1,0 +1,29 @@
+import pandas as pd
+import quandl
+
+# Set Quandl API key
+quandl.ApiConfig.api_key = 'Aw6UEBUartP_JJZL9ETV'
+
+# Load the CSV file containing ticker information
+csv_file_path = "C:\\Users\\koryc\\OneDrive\\Pulpit\\ardys bullshit\\Robinhood_Profit.csv"
+df = pd.read_csv(csv_file_path)
+
+# Extract tickers from the CSV file
+tickers = df['Instrument']
+
+# Prepare an empty list to store DataFrames
+data_frames = {}
+not_found=0
+# Fetch data for each valid ticker and store it in a DataFrame
+for ticker in tickers:
+    try:
+        stock_data = quandl.get(f"WIKI/{ticker}", rows=1)
+        stock_data['Ticker']=ticker
+        data_frames[ticker]=stock_data
+    except:
+        not_found+=1
+        
+
+data=pd.concat(data_frames, ignore_index=True)
+print(data)
+print(f"Data not found for {not_found} Tickers :(")
