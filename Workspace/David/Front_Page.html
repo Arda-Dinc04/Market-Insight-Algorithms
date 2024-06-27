@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Stock Ticker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .ticker-wrapper {
+      width: 100%;
+      overflow: hidden;
+      background-color: #f3f3f3;
+      padding: 10px;
+      border-radius: 5px;
+      position: relative;
+    }
+    .ticker-container {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker 45s linear infinite;
+    }
+    .ticker-container:hover {
+      animation-play-state: paused;
+    }
+    .stock {
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .stock.green {
+      background-color: #e8f5e9;
+      color: #388e3c;
+    }
+    .stock.red {
+      background-color: #ffebee;
+      color: #d32f2f;
+    }
+    @keyframes ticker {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    .content {
+      display: flex;
+      width: 80%;
+      margin-top: 20px;
+    }
+    .main-article, .sidebar {
+      margin: 20px;
+    }
+    .main-article {
+      flex: 2;
+    }
+    .sidebar {
+      flex: 1;
+    }
+    .video-player {
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="ticker-wrapper">
+  <div class="ticker-container" id="ticker">
+    <div class="ticker-container" id="stock-ticker-content">
+      <!-- JavaScript will inject stock items here -->
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main-article">
+    <h2>ABCDEFG</h2>
+    <p>Smaller abcdefg</p>
+  </div>
+  <div class="sidebar">
+    <h3>Nasdaq</h3>
+    <h3>Nasdaq Nasdaq Nasdaq</h3>
+    <h3>Nasdaq Nasdaq Nasdaq Nasdaq Nasdaq Nasdaq</h3>
+    <h3>Nasdaq Nasdaq Nasdaq Nasdaq </h3>
+  </div>
+</div>
+
+<div class="video-player">
+  <video width="320" height="240" controls>
+    <source src="movie.mp4" type="video/mp4">
+  </video>
+  <div>this video is insane</div>
+</div>
+
+<div class="content">
+  <div class="sidebar">
+    <h3>Future abcedfg</h3>
+  </div>
+</div>
+
+<script>
+  const apiKey = 'cppn4h1r01qi7uaio6bgcppn4h1r01qi7uaio6c0';
+  const symbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'NVDA', 'PYPL', 'PEP', 'TSLA', 'QQQ', 'ADBE', 'AMD', 'GOOGL', 'AMZN', 'AAPL', 'ARM', 'AVGO'];
+
+  async function fetchStockData() {
+    const responses = await Promise.all(symbols.map(symbol =>
+            fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`)
+    ));
+    const data = await Promise.all(responses.map(response => response.json()));
+    return data.map((stockData, index) => ({
+      symbol: symbols[index],
+      price: stockData.c,
+      change: ((stockData.c - stockData.pc) / stockData.pc * 100).toFixed(2)
+    }));
+  }
+
+  function updateTicker(data) {
+    const tickerContent = document.getElementById('stock-ticker-content');
+    tickerContent.innerHTML = '';
+    data.forEach(stock => {
+      const stockElement = document.createElement('div');
+      stockElement.className = `stock ${stock.change >= 0 ? 'green' : 'red'}`;
+      stockElement.textContent = `${stock.symbol} ${stock.price} (${stock.change}%)`;
+      tickerContent.appendChild(stockElement);
+    });
+
+    // Ensure seamless looping by cloning content
+    const cloned = tickerContent.cloneNode(true);
+    cloned.classList.add('cloned');
+    tickerContent.appendChild(cloned);
+  }
+
+  async function updateStockTicker() {
+    try {
+      const stockData = await fetchStockData();
+      updateTicker(stockData);
+    } catch (error) {
+      console.error('Error fetching stock data:', error);
+    }
+  }
+
+  // Pause animation on hover
+  const ticker = document.getElementById('stock-ticker');
+  const tickerContent = document.getElementById('stock-ticker-content');
+  ticker.addEventListener('mouseenter', () => {
+    tickerContent.style.animationPlayState = 'paused';
+  });
+  ticker.addEventListener('mouseleave', () => {
+    tickerContent.style.animationPlayState = 'running';
+  });
+
+  setInterval(updateStockTicker, 40000); // Update every 40 seconds
+  updateStockTicker(); // Initial call to populate ticker
+</script>
+</body>
+</html>
