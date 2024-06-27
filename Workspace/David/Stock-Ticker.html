@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Stock Ticker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            margin: 0;
+        }
+        .ticker-wrapper {
+            width: 100%;
+            overflow: hidden;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .ticker-container {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 45s linear infinite;
+        }
+        .ticker-container:hover {
+            animation-play-state: paused;
+        }
+        .stock {
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .stock.green {
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+        .stock.red {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+        @keyframes ticker {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="ticker-wrapper">
+    <div class="ticker-container" id="ticker">
+        <!-- JavaScript will inject stock items here -->
+    </div>
+</div>
+
+<script>
+    const apiKey = 'cppn4h1r01qi7uaio6bgcppn4h1r01qi7uaio6c0';  // Replace with your Finnhub API key
+    const symbols = ['ADBE', 'AMD', 'GOOGL', 'AMZN', 'AAPL', 'ARM', 'AVGO', 'CSCO', 'COST', 'COMP', 'INTC', 'LIN', 'LBR', 'META', 'MSFT', 'NDX', 'NDAQ', 'NVDA', 'PYPL', 'PEP', 'TSLA', 'QQQ'];
+
+    async function fetchStockData() {
+        const responses = await Promise.all(symbols.map(symbol =>
+            fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`)
+        ));
+        const data = await Promise.all(responses.map(response => response.json()));
+        return data.map((stockData, index) => ({
+            symbol: symbols[index],
+            price: stockData.c,
+            change: ((stockData.c - stockData.pc) / stockData.pc * 100).toFixed(2)
+        }));
+    }
+
+    async function displayStocks() {
+        const stocks = await fetchStockData();
+        const tickerContainer = document.querySelector('#ticker');
+        tickerContainer.innerHTML = '';  // Clear previous content
+        stocks.forEach(stock => {
+            const stockItem = document.createElement('div');
+            stockItem.className = `stock ${stock.change >= 0 ? 'green' : 'red'}`;
+            stockItem.innerHTML = `
+                <span>${stock.symbol}</span>
+                <span>${stock.change > 0 ? '+' : ''}${stock.change}%</span>
+            `;
+            tickerContainer.appendChild(stockItem);
+        });
+
+        // Ensure seamless looping by cloning content
+        const tickerWidth = tickerContainer.scrollWidth;
+        const wrapperWidth = document.querySelector('.ticker-wrapper').offsetWidth;
+        if (tickerWidth < wrapperWidth) {
+            const cloned = tickerContainer.cloneNode(true);
+            cloned.classList.add('cloned');
+            tickerContainer.appendChild(cloned);
+        }
+    }
+
+    // Initial display
+    displayStocks();
+    // Update every 60 seconds
+    setInterval(displayStocks, 60000);
+</script>
+</body>
+</html>
