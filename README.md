@@ -8,3 +8,9 @@ API KEYS
 - Arda: GjCdoQRB2tVM2tEvvyhr
 - David: xyrEL2EBKf8XvGzp1YdA
 - Tony:
+
+PRIA - Press Release Identification Algorithm
+
+FRED - Finanical-info Retrieval Engine and Database
+
+DAVE - Data Analysis and Visualization Engine  
