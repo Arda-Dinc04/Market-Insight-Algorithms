@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 
 polygon_api_key = 'JOLy_7GmGcMczPwKGCu5EtrZ40CAkeqt'
 
-
 def get_stock_splits(start_date, end_date):
     base_url = 'https://api.polygon.io/v3/reference/splits'
     params = {
@@ -23,6 +22,8 @@ def get_stock_splits(start_date, end_date):
         print(f"HTTP Request failed: {e}")
         return []
 
+def filter_today_splits(splits, today_date):
+    return [split for split in splits if split['execution_date'] == today_date]
 
 def append_to_csv(file_path, new_data):
     if not new_data:
@@ -39,28 +40,28 @@ def append_to_csv(file_path, new_data):
 
     combined_df.to_csv(file_path, index=False)
 
-
 # Main script
 def main():
-    # Define date range for today's data
-    end_date = datetime.now().strftime('%Y-%m-%d')
-    start_date = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
+    # Define today's date
+    today_date = datetime.now().strftime('%Y-%m-%d')
 
     # Fetch new stock split data
-    new_splits = get_stock_splits(start_date, end_date)
+    new_splits = get_stock_splits(today_date, today_date)
+
+    # Filter data for today's date
+    todays_splits = filter_today_splits(new_splits, today_date)
 
     # Append new data to the main CSV file
     main_csv_path = 'stock_splits.csv'
-    append_to_csv(main_csv_path, new_splits)
+    append_to_csv(main_csv_path, todays_splits)
 
     # Save new data to a separate CSV file
-    if new_splits:
-        new_data_csv_path = f'new_stock_splits_{end_date}.csv'
-        pd.DataFrame(new_splits).to_csv(new_data_csv_path, index=False)
+    if todays_splits:
+        new_data_csv_path = f'new_stock_splits_{today_date}.csv'
+        pd.DataFrame(todays_splits).to_csv(new_data_csv_path, index=False)
         print(f"New data saved to {new_data_csv_path}")
     else:
         print("No new stock splits found for today.")
-
 
 if __name__ == "__main__":
     main()
