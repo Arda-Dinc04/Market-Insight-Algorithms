@@ -1,0 +1,74 @@
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import CustomCard from './Cards';
+import DateDisplay from './DateDisplay';  // Import DateDisplay component
+
+function App() {
+  const brokers = [
+    { name: 'Charles Schwab', price: '$6.50', bgColor: '#C8E7FF' },
+    { name: 'Fidelity', price: '$5.40', bgColor: '#e0f7e0' },
+    { name: 'Robinhood', price: '$6.00', bgColor: '#f7f7e0' }
+  ];
+
+  const date = "Jul 24";  // Example date
+
+  return (
+    <div className="App">
+      <header className="App-header">
+      <main style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <DateDisplay date={date} />
+        <CustomCard title="FRES" price="$0.33" ratio="1 : 20" brokers={brokers} topColor="#42a5f5" />
+      </main>
+      </header>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+import React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+
+function CustomCard({ title = "Title", price = "$0.00", ratio = "0 : 0", brokers = [], color = "#fff", topColor = "#90caf9" }) {
+  return (
+    <Card sx={{ minWidth: 275, margin: 2, borderRadius: 2 }}>
+      <Box sx={{ backgroundColor: topColor, padding: '8px 16px', borderRadius: '4px 4px 0 0' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography variant="h5" component="div" sx={{ color: '#fff', fontWeight: 'Bold' }}>
+            {title}
+          </Typography>
+          <Typography variant="h5" component="div" sx={{ color: '#fff', fontWeight: 'Bold'  }}>
+            {price}
+          </Typography>
+        </Box>
+      </Box>
+      <CardContent>
+        <Typography variant="h4" component="div" sx={{color: '#191919', textAlign: 'center', mb: 2}}>
+          {ratio}
+        </Typography>
+        {brokers.map((broker, index) => (
+          <Box
+            key={index}
+            sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: .8, backgroundColor: broker.bgColor, padding: '10px', borderRadius: '6px' }}
+          >
+            <Typography variant="body1" sx={{ color: '#6E6D6D' }} >
+              {broker.name}
+            </Typography>
+            <Typography variant="body1" sx={{ color: '#6E6D6D' }}>
+              {broker.price}
+            </Typography>
+          </Box>
+        ))}
+      </CardContent>
+    </Card>
+  );
+}
+
+export default CustomCard;
