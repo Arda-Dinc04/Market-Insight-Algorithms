@@ -4,9 +4,9 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-function CustomCard({ title = 'Title', price = '$0.00', ratio = '0 : 0', brokers = [], topColor = '#90caf9' }) {
+function CustomCard({ title = 'Title', price = '$0.00', ratio = '0 : 0', brokers = [], color = '#fff', topColor = '#90caf9', sx }) {
   return (
-    <Card sx={{ width: 300, margin: 2, borderRadius: 2 }}>
+    <Card sx={{ width: 300, margin: 2, borderRadius: 2, ...sx }}>
       <Box sx={{ backgroundColor: topColor, padding: '8px 16px', borderRadius: '4px 4px 0 0' }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="h5" component="div" sx={{ color: '#fff', fontWeight: 'bold' }}>
