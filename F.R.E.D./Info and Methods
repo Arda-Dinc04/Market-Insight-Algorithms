@@ -1,1 +1,40 @@
-This document will outline current methods and information regarding FRED
+THIS DOCUMENT OUTLINES THE CURRENT METHODS USED BY F.R.E.D.                                   ```````````````````````````````````````````````````````````````````
+
+SUMMARY
+     F.R.E.D.'s main goal is to pull a stocks data after it is identified as potentially profitbale from P.R.I.A., and organize it into our own custom database that is categorized and more easily read by D.A.V.E. who will analyze the data and tell us whether or not the stock is a good opportunity for a short sell. F.R.E.D. 1.0 accomplishes this by creating a csv based database, although future generations of F.R.E.D. will use SQL databases instead to increase efficiency and add chart based technical data into the database. Currently F.R.E.D. is coded in such a way that the algorithm uses a lot of API calls through yahoo finance, nearly one call per piece of data. This is an inefficient method, but it avoids having to import one larger database with one API call, and then sort through that database to get the information we want, to then build our own database. If the amount of API calls becomes a problem as this code scales up, this part of the program will have to change. 
+
+CURRENT DATA MANAGED AND STORED BY F.R.E.D.
+     There are four main categories of data that FRED works with and stores. General information, technical data, financial data, and sentimental data. These coincide with the four types of analysis done by D.A.V.E. to assess whether or not a stock is viable to short sell. Below is the list of all data stored by F.R.E.D.
+
+General Information 
+1. Stock Name
+2. Sector
+3. Industry
+4. Dividends
+5. Identification Date
+
+Technical Data
+6. Date of Reverse Split
+7. Magnitude of Split
+8. Pre-Split Closing Price 
+9. Post-Split Opening price 
+10. Magnitude of Post-Split High (PoSH)
+11. Date of PoSH
+12. Day count of time after split to hit PoSH
+13. Magnitude of Post-Split Low (PoSL)
+14. Date of PoSL
+15. Day count of time after split to hit PoSL
+16. Magnitude of Pre-Split High (PreSH)
+17. Date of PreSH
+18. Day Count of time after Identification Date to hit PreSH
+19. Magnitude of Pre-Split Low (PreSL)
+20. Date of PreSL
+21. Day Count of time after Identification Date to hit PreSL
+
+Financial Data
+ - 
+
+
+Sentimental Data
+ - 
+
