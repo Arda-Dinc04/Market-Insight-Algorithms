@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CustomCard from './Cards'; // Adjust the path as necessary
 import StackCard from './StackedCard'; // Adjust the path as necessary
-import dateSections from '/Users/ardadinc/Desktop/Market-Insight/frontend/src/testData'; // Adjust the path as necessary
+import dateSections from './testData.js'; // Adjust the path as necessary
 
 function CardRow() {
   return (

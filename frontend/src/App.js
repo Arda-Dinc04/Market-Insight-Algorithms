@@ -1,19 +1,34 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
-import Clock from './Components/Clock';
-import CardRow from './Components/CardRow';
+
+import Sidebar from './Components/SideBar';
+import CalendarPage from './pages/Calendar'; // Your Calendar page component
+import AnalyticsPage from './pages/Analytics';
+import Home from './pages/Home';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Clock />
-        <CardRow />
-      </header>
-      
-    </div>
+    <Router>
+      <div style={{ display: 'flex' }}>
+        <Sidebar />
+        <div style={{ flexGrow: 1, padding: 16 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Calendar" element={<CalendarPage />} />
+            <Route path="/Analytics" element={<AnalyticsPage />} />
+            {/* Add more routes as needed */}
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
     
   );
 }
 
 export default App;
+
+
