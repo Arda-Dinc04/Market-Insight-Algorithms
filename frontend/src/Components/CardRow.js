@@ -1,3 +1,5 @@
+// CardRow.js
+
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import CustomCard from './Cards'; // Adjust the path as necessary
@@ -7,13 +9,13 @@ import dateSections from './testData'; // Adjust the path as necessary
 function CardRow() {
   return (
     <Box sx={{ position: 'relative', padding: 2, overflowX: 'auto', whiteSpace: 'nowrap' }}>
-      <Box sx={{ display: 'flex', position: 'relative' }}>
+      <Box sx={{ display: 'flex', position: 'relative', alignItems: 'flex-start' }}>
         {dateSections.map((section, sectionIndex) => (
-          <Box key={sectionIndex} className="date-section" sx={{ display: 'inline-block', position: 'relative', margin: '0 20px', visibility: 'visible' }}>
+          <Box key={sectionIndex} className="date-section" sx={{ display: 'inline-block', position: 'relative', margin: '0 20px', visibility: 'visible', verticalAlign: 'top' }}>
             <Typography variant="h4" sx={{ textAlign: 'center', marginBottom: '10px' }}>
               {section.date}
             </Typography>
-            <Box sx={{ display: 'inline-flex', alignItems: 'flex-start' }}>
+            <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
               {section.cards.length > 2 ? (
                 <StackCard cards={section.cards} />
               ) : (

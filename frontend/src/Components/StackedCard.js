@@ -1,3 +1,5 @@
+// StackCard.js
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import CustomCard from './Cards'; // Adjust the path as necessary
@@ -6,7 +8,7 @@ import Box from '@mui/material/Box';
 function StackCard({ cards }) {
   if (cards.length <= 2) {
     return (
-      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start' }}>
         {cards.map((card, index) => (
           <CustomCard
             key={index}
@@ -22,7 +24,7 @@ function StackCard({ cards }) {
   }
 
   return (
-    <Box sx={{ position: 'relative', width: '300px', height: '400px' }}>
+    <Box sx={{ position: 'relative', width: '300px', height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
       {cards.map((card, index) => (
         <CustomCard
           key={index}
