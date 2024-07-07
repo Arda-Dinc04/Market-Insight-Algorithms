@@ -1,42 +1,32 @@
 import React from 'react';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { Box, Typography } from '@mui/material';
 import CustomCard from './Cards'; // Adjust the path as necessary
 import StackCard from './StackedCard'; // Adjust the path as necessary
-<<<<<<< HEAD
-import dateSections from './testData.js'; // Adjust the path as necessary
-=======
-import dateSections from '/Users/yanzewu/PycharmProjects/Market-Insight/frontend/src/testData'; // Adjust the path as necessary
-import '/Users/yanzewu/PycharmProjects/Market-Insight/frontend/src/Components/CardRow.css'; // Import the CSS file
->>>>>>> 4e69182c0c7adf8efca8c05874652e805d92e9e4
+import dateSections from './testData'; // Adjust the path as necessary
 
 function CardRow() {
   return (
-    <Box className="card-row-container">
-      <Box className="card-container">
+    <Box sx={{ position: 'relative', padding: 2, overflowX: 'auto', whiteSpace: 'nowrap' }}>
+      <Box sx={{ display: 'flex', position: 'relative' }}>
         {dateSections.map((section, sectionIndex) => (
-          <Box key={sectionIndex} className="card-section">
-            <Typography variant="h4" className="card-date">
+          <Box key={sectionIndex} className="date-section" sx={{ display: 'inline-block', position: 'relative', margin: '0 20px', visibility: 'visible' }}>
+            <Typography variant="h4" sx={{ textAlign: 'center', marginBottom: '10px' }}>
               {section.date}
             </Typography>
-            <Box className="card-inner-container">
+            <Box sx={{ display: 'inline-flex', alignItems: 'flex-start' }}>
               {section.cards.length > 2 ? (
                 <StackCard cards={section.cards} />
               ) : (
                 section.cards.map((card, cardIndex) => (
-                  <Box
+                  <CustomCard
                     key={cardIndex}
-                    className="card-box"
-                  >
-                    <CustomCard
-                      title={card.title}
-                      price={card.price}
-                      ratio={card.ratio}
-                      brokers={card.brokers}
-                      topColor={card.topColor}
-                    />
-                  </Box>
+                    title={card.title}
+                    price={card.price}
+                    ratio={card.ratio}
+                    brokers={card.brokers}
+                    topColor={card.topColor}
+                    sx={{ margin: '0 10px' }}
+                  />
                 ))
               )}
             </Box>
