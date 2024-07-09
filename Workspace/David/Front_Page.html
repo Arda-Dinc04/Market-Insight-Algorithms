@@ -104,29 +104,39 @@
 </div>
 
 <script>
-  const apiKey = 'cppn4h1r01qi7uaio6bgcppn4h1r01qi7uaio6c0';
+  const apiKey = 'cq2ruhhr01qkgf3j2330cq2ruhhr01qkgf3j233g';
   const symbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'NVDA', 'PYPL', 'PEP', 'TSLA', 'QQQ', 'ADBE', 'AMD', 'GOOGL', 'AMZN', 'AAPL', 'ARM', 'AVGO'];
 
   async function fetchStockData() {
-    const responses = await Promise.all(symbols.map(symbol =>
-            fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`)
-    ));
-    const data = await Promise.all(responses.map(response => response.json()));
-    return data.map((stockData, index) => ({
-      symbol: symbols[index],
-      price: stockData.c,
-      change: ((stockData.c - stockData.pc) / stockData.pc * 100).toFixed(2)
-    }));
+    try {
+      const responses = await Promise.all(symbols.map(symbol =>
+        fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`)
+      ));
+      const data = await Promise.all(responses.map(response => {
+        if (!response.ok) {
+          console.error(`Error fetching data for symbol: ${symbols[responses.indexOf(response)]}`);
+          return null; // Skip this symbol if response is not OK
+        }
+        return response.json();
+      }));
+      return data.filter(stockData => stockData); // Remove null values
+    } catch (error) {
+      console.error('Error fetching stock data:', error);
+      return [];
+    }
   }
 
   function updateTicker(data) {
     const tickerContent = document.getElementById('stock-ticker-content');
     tickerContent.innerHTML = '';
-    data.forEach(stock => {
-      const stockElement = document.createElement('div');
-      stockElement.className = `stock ${stock.change >= 0 ? 'green' : 'red'}`;
-      stockElement.textContent = `${stock.symbol} ${stock.price} (${stock.change}%)`;
-      tickerContent.appendChild(stockElement);
+    data.forEach((stockData, index) => {
+      if (stockData && stockData.c !== undefined && stockData.pc !== undefined) {
+        const change = ((stockData.c - stockData.pc) / stockData.pc * 100).toFixed(2);
+        const stockElement = document.createElement('div');
+        stockElement.className = `stock ${change >= 0 ? 'green' : 'red'}`;
+        stockElement.textContent = `${symbols[index]} ${stockData.c} (${change}%)`;
+        tickerContent.appendChild(stockElement);
+      }
     });
 
     // Ensure seamless looping by cloning content
@@ -140,7 +150,7 @@
       const stockData = await fetchStockData();
       updateTicker(stockData);
     } catch (error) {
-      console.error('Error fetching stock data:', error);
+      console.error('Error updating stock ticker:', error);
     }
   }
 

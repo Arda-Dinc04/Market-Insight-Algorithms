@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 const StockTicker = () => {
-  const apiKey = 'vnRBB5lYIL4PMH7VkU72AO19AjtHfenn'; // Replace with your actual API key
-  const symbols = ['ADBE', 'AMD', 'GOOGL', 'AMZN', 'AAPL', 'ARM', 'AVGO', 'CSCO', 'COST', 'COMP', 'INTC', 'LIN', 'LBR', 'META', 'MSFT', 'NDX', 'NDAQ', 'NVDA', 'PYPL', 'PEP', 'TSLA', 'QQQ'];
+  const apiKey = 'cq2ruhhr01qkgf3j2330cq2ruhhr01qkgf3j233g'; // Replace with your actual Finnhub API key
+  const symbols = ['ADBE', 'AMD', 'GOOGL', 'AMZN', 'AAPL', 'ARM', 'MSFT', 'NVDA', 'COST', 'COMP', 'INTC', 'LIN', 'LBR', 'META', 'MSFT', 'NDX', 'NDAQ', 'NVDA', 'PYPL', 'PEP', 'TSLA', 'QQQ'];
 
   const [stocks, setStocks] = useState([]);
 
@@ -10,12 +10,12 @@ const StockTicker = () => {
     const fetchStockData = async () => {
       try {
         const responses = await Promise.all(symbols.map(symbol =>
-          fetch(`https://api.polygon.io/v2/aggs/ticker/${symbol}/prev?adjusted=true&apiKey=${apiKey}`)
+          fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`)
         ));
         const data = await Promise.all(responses.map(response => response.json()));
         const stockData = data.map((stockData, index) => {
-          const lastClose = stockData.results ? stockData.results[0].c : '-N/A';
-          const change = stockData.results ? ((lastClose - stockData.results[0].o) / stockData.results[0].o * 100).toFixed(2) : 'N/A';
+          const lastClose = stockData.c || 'N/A';
+          const change = stockData.c && stockData.pc ? ((stockData.c - stockData.pc) / stockData.pc * 100).toFixed(2) : 'N/A';
           return {
             symbol: symbols[index],
             price: lastClose,
@@ -51,10 +51,9 @@ const styles = {
   tickerWrapper: {
     width: '100%',
     overflow: 'hidden',
-    backgroundColor: '#fff',
+    backgroundColor: '#f3f3f3',
     padding: '10px',
     borderRadius: '5px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
     position: 'relative',
     boxSizing: 'border-box', // Ensure padding is included in the total width
   },
