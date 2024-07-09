@@ -7,7 +7,7 @@ Resources
 API KEYS
 - Arda: GjCdoQRB2tVM2tEvvyhr
 - David: xyrEL2EBKf8XvGzp1YdA
-- Tony:
+
 
 PRIA - Press Release Identification Algorithm
 
