@@ -54,6 +54,7 @@ const styles = {
     backgroundColor: '#f3f3f3',
     padding: '10px',
     borderRadius: '5px',
+    border: '.5px solid #ccc', // Slightly dark border
     position: 'relative',
     boxSizing: 'border-box', // Ensure padding is included in the total width
   },
