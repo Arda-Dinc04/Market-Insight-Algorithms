@@ -3,6 +3,7 @@ from nbconvert import PythonExporter
 from nbconvert.preprocessors import ExecutePreprocessor
 import pandas as pd
 
+print('Bot will take about a minute')
 def run_notebook(notebook_path):
     with open(notebook_path) as f:
         nb = nbformat.read(f, as_version=4)
