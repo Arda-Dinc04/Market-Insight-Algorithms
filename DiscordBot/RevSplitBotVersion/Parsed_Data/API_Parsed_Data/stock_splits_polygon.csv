@@ -14,6 +14,7 @@ Date,Symbol,Company Name,Split Ratio
 07/09/2024,WSM,"Williams-Sonoma, Inc.",1:2
 07/09/2024,ASCCY,ASICS Corporation,1:4
 07/05/2024,SNFCA,Security National Financial Corporation,1:1
+07/03/2024,MDRR,"Medalist Diversified REIT, Inc.",1:5
 06/27/2024,TYHOF,Toyota Tsusho Corporation,1:3
 06/27/2024,TMRNF,"Tamron Co.,Ltd.",1:2
 06/27/2024,NSSXF,NS Solutions Corporation,1:2
@@ -26,6 +27,7 @@ Date,Symbol,Company Name,Split Ratio
 06/27/2024,ASCCF,ASICS Corporation,1:4
 06/27/2024,ALNKF,Unknown,1:2
 06/26/2024,CMG,"Chipotle Mexican Grill, Inc.",1:50
+06/25/2024,ALMC,Unknown,1:10000
 06/24/2024,BBSI,"Barrett Business Services, Inc.",1:4
 06/20/2024,RGBPP,"Regen BioPharma, Inc.",1:3
 06/20/2024,RGBP,"Regen BioPharma, Inc.",1:3
@@ -62,7 +64,6 @@ Date,Symbol,Company Name,Split Ratio
 05/08/2024,NAUBF,National Australia Bank Limited,1:1
 05/07/2024,SAABF,Saab AB (publ),1:4
 05/06/2024,ESLOF,EssilorLuxottica Société anonyme,1:1
-05/01/2024,SOPA,Society Pass Incorporated,1:2
 05/01/2024,PPI,AXS Astoria Inflation Sensitive ETF,1:2
 04/26/2024,MDRKF,Unknown,1:5
 04/25/2024,XTKG,X3 Holdings Co Ltd.,1:1
@@ -169,7 +170,6 @@ Date,Symbol,Company Name,Split Ratio
 01/25/2024,CNBL,"Bonvenu Bancorp, Inc.",1:2
 01/24/2024,FBBPF,FIBRA Prologis,1:1
 01/22/2024,MTSUY,Mitsubishi Corporation,1:3
-01/16/2024,SFE,Unknown,1:100
 01/12/2024,KYOCY,Kyocera Corporation,1:4
 01/10/2024,OMVKY,OMV Aktiengesellschaft,1:4
 01/05/2024,MICRD,"Micron Solutions, Inc.",1:1000

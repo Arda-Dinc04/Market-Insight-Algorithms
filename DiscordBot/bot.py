@@ -48,6 +48,18 @@ async def runscript(ctx):
         if 'Decision' in df.columns:
             df = df.drop(columns=['Decision'])
         
+        # Calculate expected profit
+        def calculate_expected_profit(row):
+            try:
+                split_ratio = row['Split Ratio']
+                current_price = row['Price']
+                a, b = map(float, split_ratio.split(':'))
+                return (b / a) * current_price
+            except Exception as e:
+                return None
+
+        df['Expected Profit'] = df.apply(calculate_expected_profit, axis=1)
+        
         # Format the DataFrame as a string
         formatted_output = df.to_string(index=False)
         
