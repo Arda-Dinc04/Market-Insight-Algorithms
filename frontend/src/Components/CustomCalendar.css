@@ -1,0 +1,6 @@
+.calendar-container {
+    display: flex;
+    justify-content: flex-start; /* Push to the right */
+    width: 100%;
+  }
+  

@@ -8,7 +8,6 @@ import AnalyticsPage from './pages/Analytics';
 import Home from './pages/Home';
 
 
-
 function App() {
   return (
     <Router>
