@@ -7,13 +7,12 @@ import CalendarPage from './pages/Calendar'; // Your Calendar page component
 import AnalyticsPage from './pages/Analytics';
 import Home from './pages/Home';
 
-
 function App() {
   return (
     <Router>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', height: '100vh' }}>
         <Sidebar />
-        <div style={{ flexGrow: 1, padding: 16 }}>
+        <div style={{ flexGrow: 1, padding: 16, overflow: 'hidden' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Calendar" element={<CalendarPage />} />
@@ -24,10 +23,7 @@ function App() {
         </div>
       </div>
     </Router>
-    
   );
 }
 
 export default App;
-
-

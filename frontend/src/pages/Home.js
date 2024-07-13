@@ -35,7 +35,7 @@ const styles = {
     justifyContent: 'center',
     width: '100vw',
     height: '100vh',
-    overflow: 'hidden',
+    overflow: 'hidden', // Prevent scrolling
     padding: '0 10px', // Added padding to prevent content from touching the edges on mobile
     boxSizing: 'border-box',
   },
@@ -51,13 +51,16 @@ const styles = {
     width: '100%',
   },
   clock: {
+    alignSelf: 'center', // Align clock to the left
     marginBottom: '20px',
+    marginLeft: '20px', // Add some margin from the left edge
   },
   cardRow: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Align cards to the left
     alignItems: 'center',
     width: '100%',
+    overflowX: 'auto', // Allow horizontal scrolling if necessary
   },
 };
 
