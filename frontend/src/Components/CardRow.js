@@ -6,7 +6,7 @@ import dateSections from '../Data/testData'; // Adjust the path as necessary
 
 function CardRow() {
   return (
-    <Box sx={{ position: 'relative', padding: 2, overflowX: 'hidden', whiteSpace: 'nowrap' }}>
+    <Box sx={{ position: 'relative', padding: 2, overflowX: 'wrap', whiteSpace: 'nowrap' }}>
       <Box sx={{ display: 'flex', position: 'relative', alignItems: 'flex-start' }}>
         {dateSections.map((section, sectionIndex) => (
           <Box key={sectionIndex} className="date-section" sx={{ display: 'inline-block', position: 'relative', margin: '0 20px', visibility: 'visible', verticalAlign: 'top' }}>

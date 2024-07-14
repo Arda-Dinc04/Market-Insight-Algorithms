@@ -61,6 +61,7 @@ const styles = {
     alignItems: 'center',
     width: '100%',
     overflowX: 'auto', // Allow horizontal scrolling if necessary
+    
   },
 };
 

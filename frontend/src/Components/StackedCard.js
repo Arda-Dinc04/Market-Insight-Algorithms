@@ -32,7 +32,7 @@ function StackCard({ cards }) {
   }
 
   return (
-    <Box sx={{ position: 'relative', width: '300px', height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+    <Box sx={{ position: 'relative', width: '350px', height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', marginBottom:'130' }}>
       {cards.map((card, index) => (
         <Box
           key={index}
@@ -44,10 +44,10 @@ function StackCard({ cards }) {
             left: `${index * 10}px`,
             zIndex: hoveredIndex === index ? 100 : cards.length - index,
             transition: 'transform 0.3s, width 0.3s, height 0.3s, z-index 0.3s',
-            transform: hoveredIndex === index ? 'scale(1.1)' : 'scale(1)',
+            transform: hoveredIndex === index ? 'scale(1.02)' : 'scale(1)',
             width: hoveredIndex === index ? '320px' : '300px',
-            height: hoveredIndex === index ? '420px' : '400px',
-            overflow: 'hidden', // Ensuring the card content does not overflow
+            height: hoveredIndex === index ? '400px' : '400px',
+            overflow: 'wrap', // Ensuring the card content does not overflow
           }}
         >
           <CustomCard
@@ -57,22 +57,6 @@ function StackCard({ cards }) {
             brokers={card.brokers}
             topColor={card.topColor}
           />
-          {hoveredIndex === index && (
-            <Box
-              sx={{
-                position: 'absolute',
-                top: '10px',
-                left: '10px',
-                backgroundColor: 'white',
-                padding: '5px 10px',
-                borderRadius: '5px',
-                boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-                zIndex: 101, // Ensuring the label is above everything else
-              }}
-            >
-              <span>{card.title}</span>
-            </Box>
-          )}
         </Box>
       ))}
     </Box>
