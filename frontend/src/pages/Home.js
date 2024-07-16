@@ -51,9 +51,9 @@ const styles = {
     width: '100%',
   },
   clock: {
-    alignSelf: 'center', // Align clock to the left
+    alignSelf: 'center', // Center the clock horizontally
     marginBottom: '20px',
-    marginLeft: '20px', // Add some margin from the left edge
+
   },
   cardRow: {
     display: 'flex',
@@ -61,7 +61,6 @@ const styles = {
     alignItems: 'center',
     width: '100%',
     overflowX: 'auto', // Allow horizontal scrolling if necessary
-    
   },
 };
 
