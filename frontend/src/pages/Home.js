@@ -14,7 +14,7 @@ function Home() {
       {/* Centered Main Content */}
       <div style={styles.mainContent}>
         {/* Clock Component */}
-        <div style={styles.clock}>
+        <div style={styles.clockWrapper}>
           <Clock />
         </div>
 
@@ -49,11 +49,13 @@ const styles = {
     justifyContent: 'center',
     flexGrow: 1,
     width: '100%',
+    position: 'relative', // Add relative positioning to main content
   },
-  clock: {
-    alignSelf: 'center', // Center the clock horizontally
-    marginBottom: '20px',
-
+  clockWrapper: {
+     // Position absolute to place it above the card
+    top: '50%', // Adjust as needed
+    left: '10%', // Center horizontally
+    transform: 'translate(-67%, -40%)', // Center vertically and adjust above the card
   },
   cardRow: {
     display: 'flex',
@@ -75,6 +77,10 @@ const mediaQueries = {
     },
     mainContent: {
       flexDirection: 'column',
+    },
+    clockWrapper: {
+      top: '40%', // Adjust as needed for smaller screens
+      transform: 'translate(-50%, -100%)', // Adjust transform as needed
     },
   },
   '@media (max-width: 480px)': {
