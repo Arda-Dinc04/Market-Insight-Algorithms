@@ -1,6 +1,12 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). This project requires the nessary installs listed below.
+- npm install react react-dom
+- npm install react-router-dom
+- npm install @mui/material
+- npm install @mui/icons-material
+- npm install @mui/lab @date-io/date-fns date-fns
+- npm install axios
 
 ## Available Scripts
 
