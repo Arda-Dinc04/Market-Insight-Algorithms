@@ -1,49 +1,35 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import axios from 'axios';
+
+import React, { useEffect } from 'react';
+import Calendar from 'color-calendar';
+import 'color-calendar/dist/css/theme-basic.css'; // Choose the theme you prefer
+import './CustomCalendar.css'; // Import your custom CSS
 
 const CustomCalendar = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [data, setData] = useState([]);
-
-  const handleDateClick = (date) => {
-    setSelectedDate(date);
-    axios.post('http://localhost:5000/get_data', { date: date.toISOString().split('T')[0] })
-      .then(response => {
-        setData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  };
+  useEffect(() => {
+    new Calendar({
+      id: "#color-calendar",
+      calendarSize: "large", // Choose between "small" and "large"
+      theme: "basic", // Choose between "basic" and "glass"
+      primaryColor: "#1a237e", // Customize primary color
+      headerColor: "#000000", // Customize header color
+      headerBackgroundColor: "#ffffff", // Customize header background color
+      weekdaysColor: "#333333", // Customize weekdays color
+      fontFamilyHeader: 'Open Sans, sans-serif', // Customize font for header
+      fontFamilyWeekdays: 'Open Sans, sans-serif', // Customize font for weekdays
+      fontFamilyBody: 'Open Sans, sans-serif', // Customize font for body
+      dropShadow: '0 7px 30px -10px rgba(150, 170, 180, 0.5)', // Customize drop shadow
+      border: '1px solid #dddddd', // Customize border
+      borderRadius: '0.5rem', // Customize border radius
+      disableMonthYearPickers: false, // Disable month/year pickers if needed
+      disableDayClick: false, // Disable day click if needed
+      disableMonthArrowClick: false, // Disable month arrow click if needed
+      // Add other options here
+    });
+  }, []);
 
   return (
-    <div>
-      <Calendar onClickDay={handleDateClick} value={selectedDate} />
-      <div>
-        <h2>Data for {selectedDate.toDateString()}:</h2>
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Execution Date</th>
-              <th>Split From</th>
-              <th>Split To</th>
-              <th>Ticker</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((row, index) => (
-              <tr key={index}>
-                <td>{row.execution_date}</td>
-                <td>{row.split_from}</td>
-                <td>{row.split_to}</td>
-                <td>{row.ticker}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div className="calendar-container">
+      <div id="color-calendar" />
     </div>
   );
 };
