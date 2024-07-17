@@ -5,6 +5,8 @@ import './App.css';
 import Sidebar from './Components/SideBar';
 import CalendarPage from './pages/Calendar'; // Your Calendar page component
 import AnalyticsPage from './pages/Analytics';
+import ProfilePage from './pages/Profile';
+
 import Home from './pages/Home';
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/Calendar" element={<CalendarPage />} />
             <Route path="/Analytics" element={<AnalyticsPage />} />
+            <Route path="/Profile" element={<ProfilePage />} />
             {/* Add more routes as needed */}
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
