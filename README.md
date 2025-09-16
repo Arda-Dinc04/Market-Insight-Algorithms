@@ -6,10 +6,12 @@ Resources
 
 API KEYS
 - Arda: GjCdoQRB2tVM2tEvvyhr
-- David: xyrEL2EBKf8XvGzp1YdA
+
 
 
 PRIA - Press Release Identification Algorithm
+
+EDGAR: Electronic Data Gathering, Analysis, and Retrieval system
 
 FRED - Finanical-info Retrieval Engine and Database
 
